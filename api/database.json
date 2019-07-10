@@ -1,44 +1,43 @@
-
-  {
-    "places": [
-      { 
-        "id": 1, 
-        "name": "Italy", 
-        "visa_required": false 
-      },
-      { 
-        "id": 2, 
-        "name": "Switzerland", 
-        "visa_required": true 
-      },
-      { 
-        "id": 3, 
-        "name": "France", 
-        "visa_required": false
-      }
-    ],
-    "interests": [
-
-      {
-        "id": 1,
-        "placeId": 1,
-        "name": "Lake",
-        "cost": 12,
-        "description": "It is water",
-        "review": "it was AWESOME"
-      },
-      {
-        "id": 2,
-        "placeId": 2,
-        "name": "Theme Park",
-        "cost": 100,
-        "description": "Roller Coasters babyyy",
-        "review": "straight up dope"
-      }
-
-
-
-
-
-    ]
-  }
+{
+  "places": [
+    {
+      "id": 1,
+      "name": "Italy",
+      "visa_required": false
+    },
+    {
+      "id": 2,
+      "name": "Switzerland",
+      "visa_required": true
+    },
+    {
+      "id": 3,
+      "name": "France",
+      "visa_required": false
+    }
+  ],
+  "interests": [
+    {
+      "id": 1,
+      "placeId": 1,
+      "name": "Lake",
+      "cost": 12,
+      "description": "It is water",
+      "review": "it was AWESOME"
+    },
+    {
+      "id": 2,
+      "placeId": 2,
+      "name": "Theme Park",
+      "cost": 100,
+      "description": "Roller Coasters babyyy",
+      "review": "straight up dope"
+    },
+    {
+      "name": "boating",
+      "cost": "3",
+      "description": "im a boat",
+      "id": 3
+    }
+  ]
+}

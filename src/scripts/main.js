@@ -1,40 +1,80 @@
-console.log(
-  "Your Webpack application is set up and ready to go. Please start writing code."
-);
-// const Form = {
-//   addInterestForm() {
-//     return `
-//     <div id="add-form-component">
-//     <label for="formManager">Form</label>
-//     <input id="form-name" type="text" placeholder="Add Interests">
-//     <input id="add-cost" type="text">
-//     <textarea name="interest-description" id="interest-description" rows="4" columns="40"></textarea>
-//     <button id ="interest-btn">Add Interest</button>
-//     </div>
-//  `;
-//   }
-// };
-
 let interestContainer = document.querySelector("#container");
-// interestContainer.innerHTML = Form.addInterestForm()
+interestContainer.innerHTML = createDashboardContainer();
+const Form = {
+  addInterestForm() {
+    return `<fieldset>
+    <div id="add-form-component">
+    <label for="formManager">Form</label>
+    <input id="form-name" type="text" placeholder="Add Interests">
+    <input id="form-cost" type="text" placeholder="Add Cost">
+    <textarea name="form-description" id="form-description" rows="1" placeholder="Add Description" ></textarea>
+    <button id ="interest-btn">Add Interest</button>
+    </div></fieldset>
+
+ `;
+  }
+};
+
+let interestListContainer = document.querySelector("#formContainer");
+interestListContainer.innerHTML = Form.addInterestForm();
 
 function addInterests() {
-  fetch("http://localhost:8088/interests")
-    .then(data => data.json())
-    .then(newData => {
-      document.querySelector("#container").innerHTML = "";
-
-      console.log(newData);
-      newData.forEach(interest => {
-        let interestComponent = `
-           <fieldset><p>Location: ${interest.name}</p>
-           <p>Cost: ${interest.cost}</p>
-           <p>Description: ${interest.description}</p>
-           <p>Review: ${interest.review}</p></fieldset>`;
-        document.querySelector("#container").innerHTML += interestComponent;
-
-        console.log("post and fetch has worked");
-      });
+  fetchInterests().then(newData => {
+    document.querySelector("#listContainer").innerHTML = "";
+    console.log(newData);
+    newData.forEach(interest => {
+      document.querySelector("#listContainer").innerHTML += interestComponent(
+        interest
+      );
+      console.log("fetch has worked");
     });
+  });
+}
+
+function postInterests() {
+  document.querySelector("#interest-btn").addEventListener("click", () => {
+    console.log("clicked");
+    let interestName = document.querySelector("#form-name").value;
+    let interestCost = document.querySelector("#form-cost").value;
+    let interestDescription = document.querySelector("#form-description").value;
+
+    let interestObject = {
+      name: interestName,
+      cost: interestCost,
+      description: interestDescription
+    };
+    return fetch("http://localhost:8088/interests", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(interestObject)
+    }).then(() => addInterests());
+  });
+}
+
+function fetchInterests() {
+  return fetch("http://localhost:8088/interests").then(data => data.json());
+}
+
+function interestComponent(interest) {
+  return `<fieldset>
+    <p>Location: ${interest.name}</p>
+    <p>Cost: ${interest.cost}</p>
+    <p>Description: ${interest.description}</p>
+    <p>Review: ${interest.review}</p>
+    </fieldset>`;
+}
+function createDashboardContainer() {
+  return `
+    
+    <div id="formContainer"></div>
+    <div id="listContainer"></div>
+    `;
+}
+
+function addToDom(container, component) {
+  document.querySelector(container).innerHTML = component;
 }
 addInterests();
+postInterests();
