@@ -34,10 +34,18 @@
       "review": "straight up dope"
     },
     {
-      "name": "boating",
-      "cost": "3",
-      "description": "im a boat",
+      "name": "percy warner trail",
+      "cost": "free",
+      "description": "lets go hiking",
+      "place": "3",
       "id": 3
+    },
+    {
+      "name": "on a boat",
+      "cost": "free",
+      "description": "im on a boat",
+      "place": "1",
+      "id": 4
     }
   ]
 }
